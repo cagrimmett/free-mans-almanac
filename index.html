@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Free Man's Almanac</title>
+    <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+    <style type="text/css">
+	    #holder {
+		  width:50%;
+		  margin: 1.5em auto;
+	    }
+	    h1 {
+		    text-align: center;
+	    }
+	    blockquote {
+		  font-family: Helvetica, sans-serif;
+		  font-weight: 300;
+		  font-size: 1.5em;
+		  background: #f9f9f9;
+		  border-left: 10px solid #ccc;
+		  padding: 0.5em 10px;
+		}
+	</style>
+  </head>
+  <body>
+	<div id="holder">
+		<h1 id="date"></h1>
+		<blockquote id="almanac-entry"></blockquote>  	  
+	</div>
+    <script>
+	$.getJSON("free_mans_almanac.json", function(json) {
+        var today = new Date(),
+		curDay = today.getDate(),
+		months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+		curMonth = months[today.getMonth()],
+		today = curMonth + " " + curDay;
+		
+		var date = document.getElementById("date");
+		date.innerHTML = today;
+		
+		var quote = document.getElementById("almanac-entry");
+		quote.innerHTML = json[today].quote;
+    });
+    </script>
+  </body>
+</html>
